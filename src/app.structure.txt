@@ -3,11 +3,11 @@
 |   |  |
 |   +--* user
 |   |  |--user.component.ts|.html
-|   |  |--login (cmp. folder)           **
+|   |  |--login (cmp. folder)           
 |   |  |--registration (cmp. folder)
 |   |
 |   |
-|   |--dashboard (cmp. folder) **
+|   |--dashboard (cmp. folder) 
 |   |
 |   |
 |   +==* shared
@@ -16,6 +16,7 @@
 |   |  |--pipes                    
 |   |  |   |-- first-key.pipe.ts
 |   |  |--services
+|   |      |--user.service.ts
 |   |      |--auth.service.ts
 |
 |

@@ -16,7 +16,8 @@ export const routes: Routes = [
             {path:'signin',component:LoginComponent},
         ]
     },
-    {path: 'dashboard' , component:DashboardComponent, 
+    {
+        path: 'dashboard' , component:DashboardComponent, 
         canActivate: [authGuard] 
     }
 ];

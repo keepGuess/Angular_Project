@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import {
   Component,
   inject,
+  OnInit,
 } from '@angular/core';
 import {
   FormBuilder,
@@ -24,7 +25,7 @@ import { AuthService } from '../../shared/services/auth.service';
   templateUrl: './login.component.html',
   styles: ``
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit{
 
     formBuilder = inject(FormBuilder)  
 
@@ -32,6 +33,11 @@ export class LoginComponent {
                 private service:AuthService, 
                 private router:Router,
                 private toastr:ToastrService){}
+         
+  ngOnInit(): void {
+    if(this.service.isLoggedIn())
+    this.router.navigateByUrl('/dashboard')
+  }
     isSubmitted: boolean = false;
 
     form = this.formBuilder.group({
@@ -49,7 +55,7 @@ export class LoginComponent {
         if(this.form.valid){
               this.service.signin(this.form.value).subscribe({
                 next:(res:any)=>{
-                   localStorage.setItem('token' ,res.token);
+                   this.service.saveToken(res.token);
                    this.router.navigateByUrl('/dashboard')
                 },
                 error:err=>{

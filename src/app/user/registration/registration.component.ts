@@ -5,6 +5,7 @@ import {
 import {
   Component,
   inject,
+  OnInit,
 } from '@angular/core';
 import {
   AbstractControl,
@@ -13,7 +14,10 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { RouterLink } from '@angular/router';
+import {
+  Router,
+  RouterLink,
+} from '@angular/router';
 
 import { ToastrService } from 'ngx-toastr';
 
@@ -28,12 +32,17 @@ import { AuthService } from '../../shared/services/auth.service';
   styles: ``
 })
 
-export class RegistrationComponent {
+export class RegistrationComponent implements OnInit {
    formBuilder = inject(FormBuilder)
    isSubmitted:boolean = false;
 
-   constructor(private service: AuthService, private toastr:ToastrService) {
+   constructor(private service: AuthService, 
+               private toastr:ToastrService,
+               private router: Router) { }
 
+    ngOnInit(): void {
+    if(this.service.isLoggedIn())
+    this.router.navigateByUrl('/dashboard')
    }
 
    passwordMatchValidator: ValidatorFn = (control:AbstractControl):null =>{
